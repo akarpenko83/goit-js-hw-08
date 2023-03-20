@@ -18,6 +18,7 @@
     "url": "https://akarpenko83.github.io/goit-js-hw-08/issues"
   },
   "dependencies": {
+    "@vimeo/player": "^2.18.0",
     "modern-normalize": "^1.1.0",
     "simplelightbox": "^2.12.1"
   },
