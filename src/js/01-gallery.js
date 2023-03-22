@@ -25,11 +25,7 @@ function createGalleryMarkup(galleryItems) {
 };
  
 function onPictureClick(evt) {
-    evt.preventDefault();
-    if (evt.target.nodeName !== "IMG") {
-        return
-    }
-         handleModalWindow()
+   handleModalWindow()
 };
 function handleModalWindow() {
     let gallery = new SimpleLightbox('.gallery a', { captionsData: "alt", captionDelay: 250 });
