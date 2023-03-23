@@ -12,16 +12,18 @@ const refs = {
     textarea: document.querySelector(".feedback-form textarea"),
 }
 
+const formEmail = refs.form.elements.email; 
+const formMessage = refs.form.elements.message;
+
 refs.form.addEventListener("submit", onFormSubmit);
 refs.form.addEventListener("input", throttle(saveToLocalStorage, 500))
 
-onload = () => {
-    let storedData = localStorage.getItem(STORAGE_KEY);
-    if (storedData) {
-        restoreFeedback(storedData)
+
+let storedData = localStorage.getItem(STORAGE_KEY);
+if (storedData) {
+    restoreFeedback(storedData)
     }
 
-};
 
 function saveToLocalStorage({target}) {
     const { value } = target;
@@ -31,8 +33,8 @@ function saveToLocalStorage({target}) {
 };
 
 function dataFill() {
-    formData.email = refs.form.elements.email.getAttribute("value");
-    formData.message = refs.form.elements.message.getAttribute("value");
+    formData.email = formEmail.getAttribute("value");
+    formData.message = formMessage.getAttribute("value");
 }
 function updateLocalStorage() {
 localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
@@ -40,21 +42,21 @@ localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 
 function restoreFeedback(storedData) {
     const restoredData = JSON.parse(storedData);
-    refs.form.elements.email.setAttribute("value", restoredData.email);
-    refs.form.elements.message.textContent = restoredData.message;
+    formEmail.setAttribute("value", restoredData.email);
+    formMessage.setAttribute("value", restoredData.message);
+    formMessage.textContent = restoredData.message;
+    dataFill();
 }
 function onFormSubmit(event) {
     event.preventDefault();
+    console.dir(formData);
     event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
-    interfaceCleaning();
-    console.dir(formData);
+    interfaceCleaning(); 
 };
-
 function interfaceCleaning() {
-    formData.email = "";
-    formData.message = "";
-    refs.form.elements.email.setAttribute("value", "");
-    refs.form.elements.message.textContent = "";
+    formEmail.setAttribute("value", "");
+    formMessage.setAttribute("value", "");
+    formMessage.textContent = "";
  }
 
