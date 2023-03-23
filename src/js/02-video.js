@@ -7,6 +7,8 @@ const player = new Player(iframe);
 onload = () => {
     if (localStorage.getItem("videoplayer-current-time")) {
         player.setCurrentTime(localStorage.getItem("videoplayer-current-time"))
+    } else {
+        player.setCurrentTime(0);
     }
 
 };
